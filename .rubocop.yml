@@ -1,0 +1,79 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  Exclude:
+    - 'scripts/*'
+    - 'bin/*'
+    - 'cache/**/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'db/data/*'
+    - 'db/data_schema.rb'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/backtrace_silencers.rb'
+    - 'config/environments/*.rb'
+    - 'db/seeds.rb'
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: special_inside_parentheses
+  SupportedStyles:
+    - special_inside_parentheses
+    - consistent
+    - align_braces
+  IndentationWidth: 4
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: special_inside_parentheses
+  SupportedStyles:
+    - special_inside_parentheses
+    - consistent
+    - align_braces
+  IndentationWidth: 4
+
+Style/BlockComments:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  SupportedStyles:
+    - indented
+    - indented_relative_to_receiver
+  # By default, the indentation width from Style/IndentationWidth is used
+  # But it can be overridden by setting this parameter
+  IndentationWidth: 4
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'test/**/*.rb'
+    - 'config/environments/*.rb'
+    - 'config/routes.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'test/**/*.rb'
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
