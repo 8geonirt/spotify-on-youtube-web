@@ -3,17 +3,18 @@
 class HomeController < ApplicationController
   before_action :authenticate!, only: %w[track_info]
 
-  def index
-    if params[:error]
-      json_response({ error: params[:error] }, :unprocessable_entity)
-    else
-      authenticate(params[:code])
-      json_response({ success: 'ok' })
-    end
-  end
-
   def authorize
     redirect_to SpotifyAuthorizationService.authorize_url
+  end
+
+
+  def authorized
+    if params[:error]
+      @message = 'There was an error trying to authorize your account, please try again.'
+    else
+      authenticate(params[:code])
+      @message = 'Now you can close this tab and return to Youtube'
+    end
   end
 
   def clear
