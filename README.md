@@ -1,24 +1,35 @@
-# README
+# Spotify on Youtube API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API to handle request incoming from the [Spotify on Youtube Chrome Extension](https://github.com/8geonirt/spotify-on-youtube-extension) project.
 
-Things you may want to cover:
+## Prerequisites
+* [Ruby](https://www.ruby-lang.org/) v2.6.3+
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+1. Clone the repository.
+2. Go to the repository folder.
+3. Run the command `bundle install`
+4. Run `rails db:setup`
+5. Run `rails s` to start Rails server
+6. Start adding/fixing code
 
-* Configuration
+## API Keys
+* Copy the `.env.sample` file and rename it to `.env`.
 
-* Database creation
+The following environment variables are required:
+```
+SPOTIFY_CLIENT_ID=abcccccxccxfdds
+SPOTIFY_CLIENT_SECRET=231321321
+REDIRECT_URI=http://localhost:3000/authorized
+```
+* The Spotify Client ID and Spotify Client Secret can be created/obtained from the [Spotify Developers Dashboard](https://developer.spotify.com/dashboard/)
+- Also de REDIRECT_URI can be set in that dashboard.
 
-* Database initialization
+## Using the API
+This is a complement for the [Spotify on Youtube Chrome Extension]([https://github.com/8geonirt/spotify-on-youtube-extension](https://github.com/8geonirt/spotify-on-youtube-extension)) project.
 
-* How to run the test suite
+Please refer to the README for more references in how you can target this project to start using the Spotify API correctly.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Built with
+* Ruby on Rails
