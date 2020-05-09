@@ -19,9 +19,21 @@ class SpotifyService
   end
 
   def track_info
-    user_response = RestClient.get(track_api_url, headers);
-    user_params = JSON.parse(user_response.body);
-    user_params['tracks']['items'].map { |item| item }
+    begin
+      response = RestClient.get(track_api_url, headers);
+    rescue RestClient::Unauthorized,
+      RestClient::Forbidden,
+      RestClient::ExceptionWithResponse => err
+      JSON.parse(err.response)
+    else
+      body = JSON.parse(response.body);
+      body['tracks']['items'].map { |item| item }
+    end
+  end
+
+  def save_track
+    RestClient.put("https://api.spotify.com/v1/me/tracks?ids=#{track}", {}, headers);
+    { status: :ok }
   end
 
   private

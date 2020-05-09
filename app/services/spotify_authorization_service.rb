@@ -23,12 +23,45 @@ class SpotifyAuthorizationService
         client_secret: ENV['SPOTIFY_CLIENT_SECRET']
       }
 
-      auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
-      auth_params = JSON.parse(auth_response.body)
-      {
-        access_token: auth_params['access_token'],
-        refresh_token: auth_params['refresh_token']
+      begin
+        auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
+      rescue RestClient::Unauthorized, RestClient::Forbidden => err
+        JSON.parse(err.response)
+      rescue RestClient::ExceptionWithResponse => err
+        JSON.parse(err.response)
+      else
+        auth_params = JSON.parse(auth_response.body)
+        {
+          access_token: auth_params['access_token'],
+          refresh_token: auth_params['refresh_token']
+        }
+      end
+    end
+
+    def reauthorize(token)
+      body = {
+        grant_type: 'refresh_token',
+        refresh_token: token,
+        redirect_uri: ENV['REDIRECT_URI'],
+        client_id: ENV['SPOTIFY_CLIENT_ID'],
+        client_secret: ENV['SPOTIFY_CLIENT_SECRET']
       }
+
+      begin
+        auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
+      rescue RestClient::Unauthorized, RestClient::Forbidden => err
+        binding.pry
+        JSON.parse(err.response)
+      rescue RestClient::ExceptionWithResponse => err
+        binding.pry
+        JSON.parse(err.response)
+      else
+        auth_params = JSON.parse(auth_response.body)
+        {
+          access_token: auth_params['access_token'],
+          refresh_token: auth_params['refresh_token']
+        }
+      end
     end
   end
 end
