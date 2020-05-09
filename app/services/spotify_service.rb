@@ -1,9 +1,9 @@
 class SpotifyService
-  attr_reader :token, :track_name
+  attr_reader :token, :track
 
-  def initialize(token, track_name = nil)
+  def initialize(token, track = nil)
     @token = token
-    @track_name = track_name
+    @track = track
   end
 
   def user_info
@@ -28,11 +28,13 @@ class SpotifyService
 
   def headers
     {
-      Authorization: "Bearer #{token}"
+      Authorization: "Bearer #{token}",
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     }
   end
 
   def track_api_url
-    "https://api.spotify.com/v1/search?q=#{track_name}&type=track"
+    "https://api.spotify.com/v1/search?q=#{track}&type=track"
   end
 end

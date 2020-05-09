@@ -25,6 +25,9 @@ class HomeController < ApplicationController
     json_response(SpotifyService.new(user_token, track_param).track_info)
   end
 
+  def save_track
+    json_response(SpotifyService.new(user_token, track_id_param).save_track)
+  end
 
   private
 
@@ -42,6 +45,10 @@ class HomeController < ApplicationController
 
   def track_param
     params[:name]
+  end
+
+  def track_id_param
+    params[:id]
   end
 
   def set_session(response)
