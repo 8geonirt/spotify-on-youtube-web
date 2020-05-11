@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/save_track/:id', to: 'home#save_track'
   get '/clear', to: 'home#clear'
   get '/authorized', to: 'home#authorized'
+  get '/lyrics', to: 'home#lyrics'
 end

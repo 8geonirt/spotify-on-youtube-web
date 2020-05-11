@@ -41,6 +41,11 @@ class HomeController < ApplicationController
     json_response(SpotifyService.new(user_token, track_id_param).save_track)
   end
 
+  def lyrics
+    response = LyricsService.new(artist_param, track_name_param).perform
+    json_response(response)
+  end
+
   private
 
   def authenticate!
@@ -49,6 +54,14 @@ class HomeController < ApplicationController
         error: 'authorization_failed'
       }, :unprocessable_entity)
     end
+  end
+
+  def artist_param
+    params['artist']
+  end
+
+  def track_name_param
+    params['track_name']
   end
 
   def user_token

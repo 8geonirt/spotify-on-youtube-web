@@ -22,9 +22,13 @@ The following environment variables are required:
 SPOTIFY_CLIENT_ID=abcccccxccxfdds
 SPOTIFY_CLIENT_SECRET=231321321
 REDIRECT_URI=http://localhost:3000/authorized
+LYRICS_API_URL=https://orion.apiseeds.com/api/music/lyric/
+LYRICS_API_TOKEN=321321321
 ```
 * The Spotify Client ID and Spotify Client Secret can be created/obtained from the [Spotify Developers Dashboard](https://developer.spotify.com/dashboard/)
 - Also de REDIRECT_URI can be set in that dashboard.
+
+* The lyrics API token can be created/obtained on [API Seeds](https://orion.apiseeds.com/)
 
 ## Using the API
 This is a complement for the [Spotify on Youtube Chrome Extension]([https://github.com/8geonirt/spotify-on-youtube-extension](https://github.com/8geonirt/spotify-on-youtube-extension)) project.
