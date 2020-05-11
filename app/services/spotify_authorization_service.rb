@@ -50,10 +50,8 @@ class SpotifyAuthorizationService
       begin
         auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
       rescue RestClient::Unauthorized, RestClient::Forbidden => err
-        binding.pry
         JSON.parse(err.response)
       rescue RestClient::ExceptionWithResponse => err
-        binding.pry
         JSON.parse(err.response)
       else
         auth_params = JSON.parse(auth_response.body)

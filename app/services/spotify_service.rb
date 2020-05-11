@@ -20,7 +20,7 @@ class SpotifyService
 
   def track_info
     begin
-      response = RestClient.get(track_api_url, headers);
+      response = RestClient.get(URI.escape(track_api_url), headers);
     rescue RestClient::Unauthorized,
       RestClient::Forbidden,
       RestClient::ExceptionWithResponse => err
