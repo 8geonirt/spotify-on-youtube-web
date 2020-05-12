@@ -10,29 +10,45 @@ class LyricsService
 
   def perform
     begin
-      response = RestClient.get(URI.escape(lyrics_api_url), headers)
+      response = RestClient.get(URI.escape(track_url));
     rescue RestClient::Unauthorized,
       RestClient::Forbidden,
       RestClient::ExceptionWithResponse => err
-      {
-          error: true
-      }
+      JSON.parse(err.response)
     else
-      JSON.parse(response.body)
+      body = JSON.parse(response.body);
+      get_lyrics(body['message']['body']['track']['track_id'])
     end
   end
 
   private
 
-  def lyrics_api_url
-    "#{ENV['LYRICS_API_URL']}#{artist}/#{track_name}?apikey=#{ENV['LYRICS_API_TOKEN']}"
+  def get_lyrics(track_id)
+    begin
+      response = RestClient.get(URI.escape(lyrics_url(track_id)));
+    rescue RestClient::Unauthorized,
+      RestClient::Forbidden,
+      RestClient::ExceptionWithResponse => err
+      JSON.parse(err.response)
+    else
+      body = JSON.parse(response.body);
+      body['message']['body']['lyrics']
+    end
   end
 
-  def headers
-    {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Accept': 'application/json'
-    }
+  def token
+    ENV['LYRICS_API_TOKEN']
+  end
+
+  def api_url
+    "https://api.musixmatch.com/ws/1.1/"
+  end
+
+  def track_url
+    "#{api_url}matcher.track.get?format=json&q_artist=#{artist}&q_track=#{track_name}&apikey=#{token}"
+  end
+
+  def lyrics_url(track_id)
+    "#{api_url}track.lyrics.get?format=json&&track_id=#{track_id}&apikey=#{token}"
   end
 end
