@@ -42,7 +42,6 @@ class SpotifyAuthorizationService
       body = {
         grant_type: 'refresh_token',
         refresh_token: token,
-        redirect_uri: ENV['REDIRECT_URI'],
         client_id: ENV['SPOTIFY_CLIENT_ID'],
         client_secret: ENV['SPOTIFY_CLIENT_SECRET']
       }

@@ -2,6 +2,7 @@
 
 class HomeController < ApplicationController
   before_action :authenticate!, only: %w[track_info]
+  before_action :refresh_token!, only: %w[track_info user_info save_track]
 
   def authorize
     redirect_to SpotifyAuthorizationService.authorize_url
@@ -75,7 +76,7 @@ class HomeController < ApplicationController
 
   def reauthorize
     response = SpotifyAuthorizationService.reauthorize(refresh_token)
-    set_session(response)
+    set_session(response, true)
   end
 
   def refresh_token
@@ -98,8 +99,22 @@ class HomeController < ApplicationController
     params[:id]
   end
 
-  def set_session(response)
+  def set_session(response, refresh = false)
     session[:user_token] = response[:access_token]
-    session[:refresh_token] = response[:refresh_token]
+    session[:updated_at] = Time.now.to_i
+
+    if !refresh
+      session[:refresh_token] = response[:refresh_token]
+    end
+  end
+
+  def refresh_token!
+    if token_expired?
+      reauthorize
+    end
+  end
+
+  def token_expired?
+    (Time.now.to_i - session[:updated_at]) > 3600
   end
 end
