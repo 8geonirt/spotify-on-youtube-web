@@ -4,6 +4,8 @@ class HomeController < ApplicationController
   before_action :authenticate!, only: %w[track_info]
   before_action :refresh_token!, only: %w[track_info user_info save_track]
 
+  def index;end
+
   def authorize
     redirect_to SpotifyAuthorizationService.authorize_url
   end
