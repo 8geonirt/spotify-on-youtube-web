@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   include Response
   before_action :authenticate!, only: %w[track_info]
   before_action :refresh_token!, only: %w[track_info user_info save_track]
+  layout 'application'
 
   def index;end
 

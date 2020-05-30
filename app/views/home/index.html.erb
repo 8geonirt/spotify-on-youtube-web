@@ -1,38 +1,127 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Spotify on Youtube</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167452318-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-167452318-1');
-    </script>
-
-  </head>
-  <style>
-    body {
-      align-items: center;
-      background-color: rgba(0,0,0,.9);
-      color: #fff;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      margin: 0;
-    }
-
-    h1 {
-      background-color: #1db954;
-      border-radius: 50px;
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 25px 58px;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <body>
-    <h1>Spotify on Youtube - Homepage</h1>
-  </body>
-</html>
+<section class="main">
+  <img class="main__image" src="<%= image_url('youtube.svg') %>"/>
+  <div class="main__description">
+    <h1>Spotify on Youtube</h1>
+    <p>
+    A simple extension for Google Chrome that detects the track from your current played Youtube video.
+    Open your favorite song on Spotify or save it to your library with a single click...<br/>
+    Read its lyrics too.
+    </p>
+    <a href="#" target="_blank" class="primary-button">Get in on the Chrome Web Store</a>
+  </div>
+</section>
+<section class="features">
+  <h1>Features</h1>
+  <ul class="features__items">
+    <li>Save track to your Spotify library with a single click</li>
+    <li>Navigate to the artist(s)/track/album page on Spotify</li>
+    <li>Display lyrics of the current song</li>
+  </ul>
+</section>
+<section class="how-it-works">
+  <h1>How it works</h1>
+  <ul class="how-it-works__item">
+    <li>
+      <details>
+        <summary>Authorize the extension to use your Spotify account</summary>
+        <p>
+        Click on the extension and then click on the "Authorize" button, you'll be redirected to the Spotify authorization page, once the extension has been correctly authorized you can close the tab and return to Youtube.
+        </p>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Click on the extension</summary>
+        <p>
+        The extension will start detecting the title of the current Youtube video and will fetch the results from the Spotify.<br/>
+        If the title of the video is not recognized by Spotify you'll see a "Tracks not found" message. (Read FAQ section for more details)
+        </p>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Save track to your Spotify library</summary>
+        <p>
+        Simply click on the album/track image at the left of each of the items in the list and you'll get the track saved to your library.
+        </p>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Display lyrics</summary>
+        <p>
+        Click on the "Lyrics" button and the extension will try to get the lyrics.<br/>
+        If the lyrics couldn't be found you'll see a "Couldn't find lyrics" message.
+        (Read FAQ section for more details)
+        </p>
+      </details>
+    </li>
+  </ul>
+  <video controls>
+    <source src="<%= video_url('video.mp4')%>" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</section>
+<section class="faq">
+  <h1>FAQs</h1>
+  <ul class="how-it-works__item">
+    <li>
+      <details>
+        <summary>Why is the track not being detected by the extension?</summary>
+        <p>This can be due to may reasons:</p>
+        <ol>
+          <li>
+            You may see a "Tracks not found" message even when the title appears to be correct, this extension depends on the Spotify API to fetch the tracks coincidences, and it is possible the current song is not available on Spotify due to legal things and so on.
+          </li>
+          <li>
+            The title of the Youtube video may contain weirds characters or words that don't belong to the oficial track title, ex: "Busta Rhymes - We Made It - Official Music Video Live ft. Linkin Park", words like "Music Video", "Live", "With lyrics", "HD", "4K" can affect the way Spotify gets the tracks list, currently the extension is using some kind of "title sanitization" to avoid that kind of situations, it works decently but of course more improvements can be done. If you are a developer and would like to improve this functionality (or you have more ideas) feel free to contribute in the <a href="https://github.com/8geonirt/spotify-on-youtube-extension" target="_blank">repository</a>.
+          </li>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Why the lyrics couldn't be found?</summary>
+        <p>
+        The extension is using a free API to get the lyrics and it's possible the platform can't have a lyrics due to copyright or legal stuff, I have planned to use the Musixmatch API to cover most of the lyrics and to add more features to the extension, I sent an email to them to see the required plan for the extension but I haven't gotten a response from them :/
+        </p>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Why I have to re-authorize Spotify many times?</summary>
+        <p>
+        Spotify provides some authorization mechanisms in order to use their API, for example: fetching the tracks list or saving a track to the user's library. Spotify provides a token that allows those operations, that token have an expiration time, the server that handles all of this has an auto-regenerate token mechanism but after some inactivity (1 day for example) the server expires the session so you need to re-authorize again (not a big deal, or is it?).
+        </p>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>Why am I always getting a confirmation popup when clicking on the artist(s)/album/track link to open Spotify?</summary>
+        <p>
+        For security reasons Chrome needs to prompt the user to open an external application, this can't be avoided.
+        </p>
+      </details>
+    </li>
+</section>
+<section class="contribute">
+  <h1>Contribute</h1>
+  <p>
+  This little projet is open source, so feel free to clone it, modify it or do whatever you want, if you want to contribute you can fork the repositories, there are two, one for the extension which can be found <a href="https://github.com/8geonirt/spotify-on-youtube-extension" target="_blank">here</a> and the server code <a href="https://github.com/8geonirt/spotify-on-youtube-web" target="_blank">here.</a><br/>
+  I am pretty sure you can contribute in many ways, you can improve the way the title of the Youtube video is sanitized, or the session thing explained in the FAQs in the Rails project, you can refactor some stuff, have in mind I did create this project dedicating few nights, the purpose of this was to give a talk in a software comunity about how a Chrome extension can be created using React JS.
+  </p>
+</section>
+<footer>
+  <p>
+  Created by Trino Espinoza<br/>
+  Follow me on:
+  </p>
+  <ul>
+    <li>
+      <a href="https://github.com/8geonirt" target="_blank">Github</a>
+    </li>
+    <li>
+      <a href="https://twitter.com/TrinoEGlez" target="_blank">Twitter</a>
+    </li>
+  </ul>
+</footer>
