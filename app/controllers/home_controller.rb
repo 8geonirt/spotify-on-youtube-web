@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  include Response
   before_action :authenticate!, only: %w[track_info]
   before_action :refresh_token!, only: %w[track_info user_info save_track]
+  layout 'application'
+
+  def index;end
 
   def authorize
     redirect_to SpotifyAuthorizationService.authorize_url

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index'
   get '/authorize', to: 'home#authorize'
   get '/user_info', to: 'home#user_info'
   get '/track_info', to: 'home#track_info'

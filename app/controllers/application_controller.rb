@@ -1,5 +1,2 @@
-# frozen_string_literal: true
-
-class ApplicationController < ActionController::API
-  include Response
+class ApplicationController < ActionController::Base
 end
