@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify on Youtube</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167452318-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-167452318-1');
+    </script>
+
+  </head>
+  <style>
+    body {
+      align-items: center;
+      background-color: rgba(0,0,0,.9);
+      color: #fff;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      margin: 0;
+    }
+
+    h1 {
+      background-color: #1db954;
+      border-radius: 50px;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 25px 58px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <body>
+    <h1><%= @message %></h1>
+  </body>
+</html>

@@ -18,8 +18,12 @@ class HomeController < ApplicationController
       @message = 'There was an error trying to authorize your account, please try again.'
     else
       authenticate(params[:code])
-      @message = 'Now you can close this tab and return to Youtube'
+      redirect_to '/success'
     end
+  end
+
+  def success
+    @message = 'Now you can close this tab and return to Youtube'
   end
 
   def clear
